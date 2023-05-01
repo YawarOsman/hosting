@@ -1,38 +1,25 @@
-# Use the latest LTS version of Ubuntu as the base image
-FROM ubuntu:latest
-
-
-
-
+# Use the latest version of the Dart SDK as the base image
+FROM google/dart
 
 # Install Flutter
 RUN git clone https://github.com/YawarOsman/hosting.git /usr/local/flutter
 ENV PATH "$PATH:/usr/local/flutter/bin"
 
-# Copy the source code to the container
-COPY . /app/
-
-# Set the working directory to /app
+# Create a new app directory
 WORKDIR /app
 
-# Install dependencies
+# Copy the pubspec files and download dependencies
+COPY pubspec.* ./
 RUN flutter pub get
+
+# Copy the source code to the container
+COPY . .
 
 # Build the application for the web
 RUN flutter build web --release
 
-# # Copy the build files to Nginx web server directory
-# RUN cp -r build/web/* /var/www/html/
-
-# # Set permissions for the Nginx web server directory
-# RUN chown -R www-data:www-data /var/www/html/
-# RUN chmod -R 755 /var/www/html/
-
 # Expose the default HTTP port
-EXPOSE 80
+EXPOSE 8080
 
-# # Start Nginx web server
-# CMD ["nginx", "-g", "daemon off;"]
-CMD ["flutter", "run"]
-
-
+# Start the web server
+CMD ["flutter", "run", "-d", "web-server", "--web-hostname", "0.0.0.0", "--web-port", "8080"]
