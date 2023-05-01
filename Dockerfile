@@ -1,24 +1,20 @@
-# Use the latest version of the Dart SDK as the base image
-FROM google/dart
+# Use the official Dart SDK image as the base image
+FROM google/dart:latest
 
-
-
-# Create a new app directory
+# Set the working directory in the container to /app
 WORKDIR /app
 
-# Copy the pubspec files and download dependencies
-COPY pubspec.* ./
-RUN flutter pub get
-
-# Copy the source code to the container
+# Copy the contents of the current directory to the container's /app directory
 COPY . .
 
-# Build the application for the web
+# Install the Flutter SDK and dependencies
+RUN curl -sL https://storage.googleapis.com/flutter_infra/releases/stable/linux/flutter_linux_2.8.0-stable.tar.xz | tar xJ -C /usr/local
+ENV PATH="/usr/local/flutter/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+RUN flutter config --enable-web && flutter doctor && flutter pub get
+
+# Build the Flutter web application
 RUN flutter build web --release
 
-# Expose the default HTTP port
-EXPOSE 8080
-
-# Start the web server
-CMD ["flutter", "run", "-d", "web-server", "--web-hostname", "0.0.0.0", "--web-port", "8080"]
-
+# Use NGINX as the web server and copy the built Flutter web application to the web root
+FROM nginx:stable-alpine
+COPY --from=0 /app/build/web /usr/share/nginx/html
