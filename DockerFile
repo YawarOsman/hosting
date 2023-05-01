@@ -1,23 +1,12 @@
 # Use the latest LTS version of Ubuntu as the base image
 FROM ubuntu:latest
 
-# # Install necessary packages
-# RUN apt-get update && \
-#     apt-get install -y curl git unzip xz-utils libglu1-mesa nginx
 
-# Copy the SSH key to the container
-COPY id_ed25519 /root/.ssh/id_ed25519
-COPY id_ed25519.pub /root/.ssh/id_ed25519.pub
 
-# Set correct permissions for the SSH key
-RUN chmod 600 /root/.ssh/id_ed25519 && \
-    chmod 644 /root/.ssh/id_ed25519.pub
 
-# Add GitHub to known_hosts
-RUN ssh-keyscan github.com > /root/.ssh/known_hosts
 
 # Install Flutter
-RUN git clone git@github.com:Morinairaq/Morina-App-AdminPanel.git /usr/local/flutter
+RUN git clone https://github.com/YawarOsman/hosting.git /usr/local/flutter
 ENV PATH "$PATH:/usr/local/flutter/bin"
 
 # Copy the source code to the container
