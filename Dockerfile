@@ -18,3 +18,8 @@ RUN flutter build web --release
 # Use NGINX as the web server and copy the built Flutter web application to the web root
 FROM nginx:stable-alpine
 COPY --from=0 /app/build/web /usr/share/nginx/html
+
+# Expose the default HTTP port
+EXPOSE 80
+
+CMD ["flutter", "run"]
