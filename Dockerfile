@@ -8,7 +8,7 @@ WORKDIR /app
 COPY . .
 
 # Install the Flutter SDK and dependencies
-RUN curl -sL https://storage.googleapis.com/flutter_infra/releases/stable/linux/flutter_linux_2.8.0-stable.tar.xz | tar xJ -C /usr/local
+RUN curl -sL https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.7.12-stable.tar.xz | tar xJ -C /usr/local
 ENV PATH="/usr/local/flutter/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 RUN flutter config --enable-web && flutter doctor && flutter pub get
 
