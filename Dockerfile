@@ -9,7 +9,7 @@ COPY . .
 
 # Install the Flutter SDK and dependencies
 RUN curl -sL https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.7.12-stable.tar.xz | tar xJ -C /usr/local
-ENV PATH="/usr/local/flutter/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+ENV PATH "$PATH:/usr/local/flutter/bin"
 RUN flutter config --enable-web && flutter doctor && flutter pub get
 
 # Build the Flutter web application
