@@ -1,9 +1,7 @@
 # Use the latest version of the Dart SDK as the base image
 FROM google/dart
 
-# Install Flutter
-RUN git clone https://github.com/YawarOsman/hosting.git /usr/local/flutter
-ENV PATH "$PATH:/usr/local/flutter/bin"
+
 
 # Create a new app directory
 WORKDIR /app
