@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "32010850041",
+    "project_id": "hosting-9603e",
+    "storage_bucket": "hosting-9603e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:32010850041:android:986298788e6a3ce8839c28",
+        "android_client_info": {
+          "package_name": "com.example.hosting"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "32010850041-b65tdm5rr87thfuuni9503csc0fvg65o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5EGU3LGwVEzY3jzBnprwqlRzt4rgwaek"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "32010850041-b65tdm5rr87thfuuni9503csc0fvg65o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
